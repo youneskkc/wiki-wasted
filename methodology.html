@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المنهجية — وقت ضائع</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'IBM Plex Sans Arabic',sans-serif;background:#faf9f6;color:#1a1a1a;line-height:2}
+.container{max-width:700px;margin:0 auto;padding:40px 20px 60px}
+.back{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:#1e40af;text-decoration:none;margin-bottom:30px}
+.back:hover{text-decoration:underline}
+h1{font-size:28px;font-weight:800;margin-bottom:8px}
+.subtitle{color:#555;font-size:15px;margin-bottom:32px}
+h2{font-size:18px;font-weight:700;margin:28px 0 10px;padding-top:20px;border-top:1px solid #e8e4dc}
+h2:first-of-type{border-top:none;padding-top:0}
+p{font-size:14px;color:#333;margin-bottom:12px}
+ul{padding-right:20px;margin-bottom:12px}
+li{font-size:14px;color:#333;margin-bottom:6px}
+code{background:#f0ede6;padding:2px 6px;border-radius:4px;font-size:13px;direction:ltr;display:inline-block}
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px 20px;font-size:13px;color:#92400e;margin:20px 0;line-height:1.9}
+.sources{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:16px 20px;margin:20px 0}
+.sources a{color:#166534;font-size:13px}
+footer{text-align:center;padding:24px;font-size:12px;color:#999;border-top:1px solid #e8e4dc;background:#fff;margin-top:20px}
+footer a{color:#555;text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back">→ العودة للصفحة الرئيسية</a>
+
+  <h1>المنهجية</h1>
+  <p class="subtitle">كيف نحسب الأرقام، ولماذا أنشأنا هذا الموقع</p>
+
+  <h2>هدف الموقع</h2>
+  <p>هذا الموقع ساخر في طابعه، لكن أرقامه حقيقية بالكامل. الهدف هو التوعية بأن الطاقة البشرية التي تُصرف في نقاشات الهوية العقيمة على ويكيبيديا — من اخترع الكسكس أو لمن ينتسب القفطان — يمكن أن تُوجَّه لما هو أنفع.</p>
+  <p>لا ننحاز لطرف ضد آخر. النقد موجّه للجميع: جزائريين ومغاربة وكل من يهدر وقته في هذه الحروب الرقمية.</p>
+
+  <h2>مصادر البيانات</h2>
+  <p>جميع الأرقام تُجلب مباشرة من واجهة ويكيبيديا البرمجية (Wikipedia REST API) لحظة فتح الصفحة:</p>
+  <ul>
+    <li><strong>عدد التعديلات:</strong> نستخدم نقطة الوصول <code>GET /w/rest.php/v1/page/{title}/history/counts/edits</code></li>
+    <li><strong>عدد المحررين:</strong> نستخدم نقطة الوصول <code>GET /w/rest.php/v1/page/{title}/history/counts/editors</code></li>
+  </ul>
+  <p>لكل موضوع من المواضيع الخمسة، نجمع بيانات المقالة الرئيسية وصفحة النقاش من ثلاث نسخ لغوية:</p>
+  <ul>
+    <li>ويكيبيديا العربية (ar.wikipedia.org)</li>
+    <li>ويكيبيديا الفرنسية (fr.wikipedia.org)</li>
+    <li>ويكيبيديا الإنجليزية (en.wikipedia.org)</li>
+  </ul>
+
+  <h2>المواضيع المختارة</h2>
+  <p>اخترنا خمسة مواضيع معروفة بكثرة حروب التعديل بين المحررين الجزائريين والمغاربة:</p>
+  <ul>
+    <li><strong>الكسكس</strong> — نزاع حول أصل الطبق وانتسابه</li>
+    <li><strong>الزليج</strong> — نزاع حول أصل فن الزليج</li>
+    <li><strong>القفطان</strong> — نزاع حول ملكية اللباس التقليدي</li>
+    <li><strong>الراي</strong> — نزاع حول أصل هذا النوع الموسيقي</li>
+    <li><strong>الحايك</strong> — نزاع حول أصل هذا اللباس التقليدي</li>
+  </ul>
+
+  <h2>حساب الوقت</h2>
+  <p>نعتمد تقدير <strong>٨ دقائق لكل تعديل</strong> كمتوسط. هذا الرقم مبني على:</p>
+  <ul>
+    <li>دراسات سلوك المحررين على ويكيبيديا تشير إلى أن التعديل الجوهري يستغرق بين ٥ و١٥ دقيقة</li>
+    <li>تعديلات النقاشات تتطلب قراءة السياق ثم الكتابة، أي ما بين ٨ و١٢ دقيقة</li>
+    <li>اخترنا ٨ دقائق كتقدير محافظ يشمل التعديلات البسيطة والمعقدة</li>
+  </ul>
+  <p><strong>المعادلة:</strong></p>
+  <p><code>إجمالي الدقائق = (مجموع تعديلات المقالات + مجموع تعديلات صفحات النقاش) × ٨</code></p>
+
+  <h2>الإسقاط السنوي</h2>
+  <p>ويكيبيديا العربية انطلقت حوالي عام ٢٠٠٣. نقسم إجمالي التعديلات على ٢٠ سنة للحصول على المعدل السنوي، ثم نضربه في ٨ دقائق:</p>
+  <p><code>ساعات/سنة = (إجمالي التعديلات ÷ ٢٠) × ٨ ÷ ٦٠</code></p>
+
+  <h2>حساب البدائل</h2>
+  <ul>
+    <li><strong>زراعة الأشجار:</strong> ٢٠ دقيقة لزراعة شجرة واحدة (تشمل الحفر والغرس)</li>
+    <li><strong>دروس محو الأمية:</strong> ٣٠ دقيقة لكل درس (معيار منظمات محو الأمية)</li>
+    <li><strong>مساهمات برمجية:</strong> ٥٠٠ دقيقة (~٨ ساعات) لمساهمة برمجية مفتوحة المصدر</li>
+  </ul>
+
+  <div class="note">
+    <strong>ملاحظة مهمة:</strong> الوقت المحسوب هو تقدير تقريبي وليس قياسا دقيقا. ليس كل تعديل يتعلق بالنزاع بين البلدين — بعض التعديلات تحسينات مشروعة للمحتوى. لكن حتى لو كانت نسبة التعديلات النزاعية ٥٠٪ فقط، تبقى الأرقام مذهلة.
+  </div>
+
+  <div class="sources">
+    <p><strong>مصادر تقنية:</strong></p>
+    <a href="https://www.mediawiki.org/wiki/API:REST_API" target="_blank">MediaWiki REST API Documentation</a><br>
+    <a href="https://en.wikipedia.org/wiki/Wikipedia:Edit_warring" target="_blank">Wikipedia: Edit warring</a>
+  </div>
+</div>
+
+<footer>
+  صُنع بواسطة <a href="https://youdo.blog" target="_blank" rel="noopener">يونس بن عمارة</a>
+  بمساعدة <a href="https://mulerun.com" target="_blank" rel="noopener">Mulerun.com</a>
+</footer>
+</body>
+</html>
