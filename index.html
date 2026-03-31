@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وقت ضائع — كم أنفقنا في جدالات ويكيبيديا؟</title>
+<meta name="description" content="أرقام حقيقية عن الوقت المهدر في نقاشات لا طائل منها على ويكيبيديا بين الجزائريين والمغاربة">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#faf9f6;--surface:#fff;--border:#e8e4dc;--text:#1a1a1a;--text2:#555;--text3:#999;
+  --red:#b91c1c;--red-bg:#fef2f2;--amber:#92400e;--amber-bg:#fffbeb;
+  --green:#166534;--green-bg:#f0fdf4;--blue:#1e40af;--blue-bg:#eff6ff;
+}
+body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:#1a1a1a;color:#fff;text-align:center}
+.hero-img{width:100%;max-height:400px;object-fit:cover;opacity:0.5;display:block}
+.hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:linear-gradient(transparent 0%,rgba(0,0,0,0.7) 100%)}
+.hero h1{font-size:clamp(24px,5vw,42px);font-weight:800;margin-bottom:8px;text-shadow:0 2px 12px rgba(0,0,0,0.5)}
+.hero p{font-size:clamp(14px,2.5vw,18px);opacity:0.85;max-width:600px}
+.hero-credit{position:absolute;bottom:6px;left:12px;font-size:10px;opacity:0.4;direction:ltr}
+
+/* MAIN */
+.container{max-width:800px;margin:0 auto;padding:0 20px}
+
+/* INTRO */
+.intro{text-align:center;padding:40px 0 20px;font-size:15px;color:var(--text2);line-height:2}
+
+/* LOADING */
+.page-loading{text-align:center;padding:60px 20px;color:var(--text3)}
+.spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* TOPIC CARDS */
+.topics{padding:20px 0}
+.topic-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:12px}
+.topic-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.topic-name{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
+.topic-emoji{font-size:24px}
+.topic-total{font-size:13px;color:var(--red);font-weight:600;background:var(--red-bg);padding:4px 12px;border-radius:8px}
+.topic-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.lang-stat{background:var(--bg);border-radius:8px;padding:10px 12px;text-align:center}
+.lang-label{font-size:11px;color:var(--text3);font-weight:500;margin-bottom:4px}
+.lang-edits{font-size:16px;font-weight:700;color:var(--text)}
+.lang-editors{font-size:11px;color:var(--text2)}
+.topic-sentence{font-size:13px;color:var(--text2);line-height:1.8;padding-top:8px;border-top:1px solid var(--border)}
+
+/* SUMMARY */
+.summary{background:var(--red-bg);border:2px solid #fecaca;border-radius:16px;padding:32px;text-align:center;margin:30px 0}
+.summary-number{font-size:clamp(36px,8vw,56px);font-weight:800;color:var(--red);line-height:1.2}
+.summary-label{font-size:16px;color:var(--amber);margin-top:4px;font-weight:500}
+.summary-sub{font-size:14px;color:var(--text2);margin-top:12px;line-height:1.8}
+
+/* YEARLY */
+.yearly{background:var(--amber-bg);border:2px solid #fde68a;border-radius:16px;padding:28px;text-align:center;margin-bottom:30px}
+.yearly-num{font-size:clamp(28px,6vw,40px);font-weight:800;color:var(--amber)}
+.yearly-label{font-size:15px;color:var(--amber);margin-top:4px}
+
+/* ALTERNATIVES */
+.alt-section{padding:30px 0}
+.alt-title{font-size:20px;font-weight:700;text-align:center;margin-bottom:20px}
+.alt-card{background:var(--green-bg);border:1px solid #bbf7d0;border-radius:12px;padding:20px 24px;margin-bottom:10px;display:flex;align-items:center;gap:16px}
+.alt-icon{font-size:32px;flex-shrink:0}
+.alt-text{font-size:14px;line-height:1.8}
+.alt-num{font-weight:700;color:var(--green);font-size:18px}
+
+/* METHODOLOGY LINK */
+.method-link{text-align:center;padding:30px 0;border-top:1px solid var(--border)}
+.method-link a{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--blue);text-decoration:none;background:var(--blue-bg);padding:10px 24px;border-radius:10px;font-weight:500;transition:all .15s}
+.method-link a:hover{background:#dbeafe}
+
+/* FOOTER */
+footer{text-align:center;padding:24px;font-size:12px;color:var(--text3);border-top:1px solid var(--border);background:var(--surface);margin-top:20px}
+footer a{color:var(--text2);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media(max-width:600px){
+  .topic-stats{grid-template-columns:1fr}
+  .alt-card{flex-direction:column;text-align:center}
+  .container{padding:0 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg/1280px-Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg" alt="لوحة كلاسيكية تصور صراعا قديما">
+  <div class="hero-overlay">
+    <h1>وقت ضائع</h1>
+    <p>كم من الوقت أنفقنا في جدالات لا طائل منها على ويكيبيديا؟<br>الأرقام حقيقية. المأساة حقيقية.</p>
+  </div>
+  <span class="hero-credit">Vincenzo Camuccini — La morte di Cesare (1806)</span>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro">
+    بين الجزائريين والمغاربة خلافات لا تنتهي على ويكيبيديا: من اخترع الكسكس؟ لمن ينتسب القفطان؟ من صاحب الزليج؟<br>
+    هذه الصفحة تحسب — بأرقام حقيقية من واجهة ويكيبيديا — كم تعديلا أُجري وكم شخصا شارك في هذه النقاشات العقيمة.
+  </div>
+
+  <!-- LOADING STATE -->
+  <div id="loadingState" class="page-loading">
+    <div class="spinner"></div>
+    <div>جاري جلب البيانات من ويكيبيديا...</div>
+  </div>
+
+  <!-- CONTENT (hidden until data loads) -->
+  <div id="mainContent" style="display:none">
+
+    <!-- TOPIC CARDS -->
+    <div class="topics" id="topicsContainer"></div>
+
+    <!-- SUMMARY -->
+    <div class="summary">
+      <div class="summary-number" id="totalMinutes">—</div>
+      <div class="summary-label">دقيقة أُنفقت في تعديل ونقاش هذه المواضيع الخمسة</div>
+      <div class="summary-sub" id="totalHours"></div>
+    </div>
+
+    <!-- YEARLY PROJECTION -->
+    <div class="yearly">
+      <div class="yearly-num" id="yearlyHours">—</div>
+      <div class="yearly-label">ساعة ستُهدر هذا العام إذا استمر النزيف بنفس الوتيرة</div>
+    </div>
+
+    <!-- ALTERNATIVES -->
+    <div class="alt-section">
+      <div class="alt-title">بدائل أنفع لو قضوها فيها</div>
+      <div id="altContainer"></div>
+    </div>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div class="method-link">
+    <a href="methodology.html">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      منهجية الحساب وهدف الموقع
+    </a>
+  </div>
+</div>
+
+<footer>
+  صُنع بواسطة <a href="https://youdo.blog" target="_blank" rel="noopener">يونس بن عمارة</a>
+  بمساعدة <a href="https://mulerun.com" target="_blank" rel="noopener">Mulerun.com</a>
+</footer>
+
+<script>
+/* ===== TOPIC CONFIG ===== */
+const TOPICS = [
+  { id:'couscous', name:'الكسكس', emoji:'🍲',
+    ar:{a:'كسكس',t:'نقاش:كسكس'}, fr:{a:'Couscous',t:'Discussion:Couscous'}, en:{a:'Couscous',t:'Talk:Couscous'} },
+  { id:'zellige', name:'الزليج', emoji:'🔷',
+    ar:{a:'زليج',t:'نقاش:زليج'}, fr:{a:'Zellige',t:'Discussion:Zellige'}, en:{a:'Zellij',t:'Talk:Zellij'} },
+  { id:'caftan', name:'القفطان', emoji:'👘',
+    ar:{a:'قفطان',t:'نقاش:قفطان'}, fr:{a:'Caftan',t:'Discussion:Caftan'}, en:{a:'Kaftan',t:'Talk:Kaftan'} },
+  { id:'rai', name:'الراي', emoji:'🎵',
+    ar:{a:'راي (موسيقى)',t:'نقاش:راي (موسيقى)'}, fr:{a:'Raï',t:'Discussion:Raï'}, en:{a:'Raï',t:'Talk:Raï'} },
+  { id:'haik', name:'الحايك', emoji:'🧣',
+    ar:{a:'حيك',t:'نقاش:حيك'}, fr:{a:'Haïk (vêtement)',t:'Discussion:Haïk (vêtement)'}, en:{a:'Haik (garment)',t:'Talk:Haik (garment)'} }
+];
+
+const LANG_LABELS = { ar:'العربية', fr:'الفرنسية', en:'الإنجليزية' };
+const MINUTES_PER_EDIT = 8; // methodology: average 8 minutes per edit/discussion contribution
+
+/* ===== FETCH HELPERS ===== */
+async function getCount(lang, title, type) {
+  // type: 'edits' or 'editors'
+  const url = `https://${lang}.wikipedia.org/w/rest.php/v1/page/${encodeURIComponent(title)}/history/counts/${type}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return 0;
+    const data = await res.json();
+    return data.count || 0;
+  } catch { return 0; }
+}
+
+async function fetchTopicData(topic) {
+  const langs = ['ar','fr','en'];
+  const results = { ar:{}, fr:{}, en:{}, totalEdits:0, totalEditors:0 };
+
+  const promises = [];
+  for (const lang of langs) {
+    const articleTitle = topic[lang].a;
+    const talkTitle = topic[lang].t;
+    // Article edits + talk edits + article editors
+    promises.push(
+      getCount(lang, articleTitle, 'edits').then(n => ({ lang, key:'articleEdits', val:n })),
+      getCount(lang, talkTitle, 'edits').then(n => ({ lang, key:'talkEdits', val:n })),
+      getCount(lang, articleTitle, 'editors').then(n => ({ lang, key:'editors', val:n }))
+    );
+  }
+
+  const data = await Promise.all(promises);
+  for (const d of data) {
+    results[d.lang][d.key] = d.val;
+  }
+
+  for (const lang of langs) {
+    const r = results[lang];
+    r.totalEdits = (r.articleEdits||0) + (r.talkEdits||0);
+    results.totalEdits += r.totalEdits;
+    results.totalEditors += (r.editors||0);
+  }
+
+  return results;
+}
+
+/* ===== FORMATTING ===== */
+function fmt(n) { return n.toLocaleString('ar-EG'); }
+
+/* ===== RENDER ===== */
+function renderTopic(topic, data) {
+  const langs = ['ar','fr','en'];
+  const statsHtml = langs.map(lang => {
+    const r = data[lang];
+    return `<div class="lang-stat">
+      <div class="lang-label">${LANG_LABELS[lang]}</div>
+      <div class="lang-edits">${fmt(r.totalEdits)}</div>
+      <div class="lang-editors">${fmt(r.editors||0)} محرر</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="topic-card">
+    <div class="topic-header">
+      <div class="topic-name"><span class="topic-emoji">${topic.emoji}</span> ${topic.name}</div>
+      <div class="topic-total">${fmt(data.totalEdits)} تعديل</div>
+    </div>
+    <div class="topic-stats">${statsHtml}</div>
+    <div class="topic-sentence">
+      ناقش <strong>${fmt(data.totalEditors)}</strong> عضوا موضوع ${topic.name}
+      وأجروا <strong>${fmt(data.totalEdits)}</strong> تعديلا عبر ويكيبيديا العربية والفرنسية والإنجليزية
+    </div>
+  </div>`;
+}
+
+function renderAlternatives(totalMinutes) {
+  const alts = [
+    { emoji:'🌳', calc: Math.floor(totalMinutes / 20),
+      text: (n) => `لو قضى هؤلاء الأعضاء هذه الدقائق في زراعة الأشجار لزرعوا <span class="alt-num">${fmt(n)}</span> شجرة (بمعدل ٢٠ دقيقة للشجرة الواحدة)` },
+    { emoji:'📚', calc: Math.floor(totalMinutes / 30),
+      text: (n) => `لو أمضوا هذا الوقت في تعليم أطفال القراءة لقدّموا <span class="alt-num">${fmt(n)}</span> درسا في محو الأمية (بمعدل ٣٠ دقيقة للدرس)` },
+    { emoji:'🏗️', calc: Math.floor(totalMinutes / 500),
+      text: (n) => `لو ساهموا في مشاريع مفتوحة المصدر لأنجزوا ما يعادل <span class="alt-num">${fmt(n)}</span> مساهمة برمجية تنفع الملايين (بمعدل ٥٠٠ دقيقة للمساهمة)` }
+  ];
+  return alts.map(a => `<div class="alt-card">
+    <div class="alt-icon">${a.emoji}</div>
+    <div class="alt-text">${a.text(a.calc)}</div>
+  </div>`).join('');
+}
+
+/* ===== MAIN ===== */
+async function main() {
+  let grandTotalEdits = 0;
+  let topicsHtml = '';
+
+  // Fetch all topics in parallel
+  const allData = await Promise.all(TOPICS.map(t => fetchTopicData(t)));
+
+  for (let i = 0; i < TOPICS.length; i++) {
+    const data = allData[i];
+    grandTotalEdits += data.totalEdits;
+    topicsHtml += renderTopic(TOPICS[i], data);
+  }
+
+  const totalMinutes = grandTotalEdits * MINUTES_PER_EDIT;
+  const totalHours = Math.floor(totalMinutes / 60);
+  const totalDays = (totalHours / 24).toFixed(1);
+
+  // Yearly projection: estimate based on edits per year
+  // Use a simple projection: total edits happened over ~20 years of Wikipedia
+  // Recent rate is roughly totalEdits/20 per year, projected forward
+  const yearsActive = 20; // Wikipedia Arabic started ~2003
+  const yearlyEdits = Math.round(grandTotalEdits / yearsActive);
+  const yearlyMinutes = yearlyEdits * MINUTES_PER_EDIT;
+  const yearlyHours = Math.round(yearlyMinutes / 60);
+
+  // Render
+  document.getElementById('topicsContainer').innerHTML = topicsHtml;
+  document.getElementById('totalMinutes').textContent = fmt(totalMinutes);
+  document.getElementById('totalHours').textContent = `أي ما يعادل ${fmt(totalHours)} ساعة — أو ${totalDays} يوم متواصل من العمل`;
+  document.getElementById('yearlyHours').textContent = fmt(yearlyHours) + ' ساعة/سنة';
+  document.getElementById('altContainer').innerHTML = renderAlternatives(totalMinutes);
+
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+}
+
+main().catch(err => {
+  document.getElementById('loadingState').innerHTML = '<div style="color:#b91c1c">خطأ في جلب البيانات — يرجى تحديث الصفحة</div>';
+});
+</script>
+</body>
+</html>
